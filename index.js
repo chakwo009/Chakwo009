@@ -2,6 +2,12 @@ import React, {Component} from 'react';
 import {AppRegistry} from 'react-native';
 import {name as appName} from './app.json';
 
+//Yellow Warning
+import {YellowBox} from 'react-native';
+
+// Hidden Yellow Warning
+console.disableYellowBox = true;
+
 import {Container, Content, Text, StyleProvider} from 'native-base';
 import getTheme from './native-base-theme/components';
 import material from './native-base-theme/variables/material';

@@ -44,6 +44,7 @@ export default class ProductCard extends React.Component {
               <ScaledImage
                 uri={`https://www.hkstalls.com/images/products/${product.id}/${product.frontimg}`}
                 width={width}
+                fall={require('../../images/banner/no-image_800x800.png')}
               />
             </View>
           ) : (

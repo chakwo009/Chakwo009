@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, ActivityIndicator, FlatList, Dimensions} from 'react-native';
-import {Text, Container, Content, StyleProvider} from 'native-base';
+import {View, Dimensions} from 'react-native';
+import {Header, Button, Text, Container, Item, Icon, Input} from 'native-base';
 
 import {withNavigation} from 'react-navigation';
 
@@ -16,7 +16,9 @@ import Carousel from 'react-native-snap-carousel';
 // 匯入自定組件
 import ScaledImage from '../../components/scaledimage';
 import CatMenu from '../../components/catmenu';
-import ProductCard from '../../components/product-card';
+import ProductList from '../../components/product-list';
+import Loading from '../../components/loading';
+import SearchBar from '../../components/searchbar';
 
 //匯入自定css
 import theme from '../../css/theme.js';
@@ -41,8 +43,8 @@ class Home extends React.Component {
   //Banner Source
   state = {
     entries: [
-      {image: 'http://www.freelancer-hk.com/hkstalls-app/1x/banner01.png'},
-      {image: 'http://www.freelancer-hk.com/hkstalls-app/1x/banner011.png'},
+      {image: 'http://www.freelancer-hk.com/hkstalls_img/banner_01.png'},
+      {image: 'http://www.freelancer-hk.com/hkstalls_img/banner_01.png'},
     ],
   };
 
@@ -52,6 +54,7 @@ class Home extends React.Component {
       <ScaledImage
         uri={item.image}
         width={Dimensions.get('window').width - 20}
+        fall={require('../../images/banner/no-image.png')}
         key={index}
       />
     );
@@ -73,6 +76,7 @@ class Home extends React.Component {
   header = () => {
     return (
       <View>
+        <SearchBar navigation={this.props.navigation} />
         <View style={[theme.shadowbox, theme.marginH_s]}>
           <Carousel
             ref={c => {
@@ -105,40 +109,23 @@ class Home extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container style={[theme.container]}>
         {/* <Header /> */}
-        <View style={{flex: 1, padding: 10}}>
-          <Query query={GET_ALL_PRODUCTS}>
-            {({loading, error, data}) => {
-              if (loading)
-                return <ActivityIndicator size="large" color="#ccc" />;
-              if (error) return <Text>{error.message}</Text>;
-              return (
-                <FlatList
-                  data={data.products}
-                  keyExtractor={this._keyExtractor}
-                  //Import Header in Flatlist
-                  ListHeaderComponent={this.header}
-                  //Import Footer
-                  ListFooterComponent={this.footer}
-                  numColumns={3}
-                  // Performance settings
-                  scrollEnabled={true}
-                  // Hidden Scrollbar
-                  showsVerticalScrollIndicator={false}
-                  //Child items
-                  renderItem={({item, idx}) => (
-                    <ProductCard
-                      product={item}
-                      navigation={this.props.navigation}
-                      key={idx}
-                    />
-                  )}
-                />
-              );
-            }}
-          </Query>
-        </View>
+        <Query query={GET_ALL_PRODUCTS}>
+          {({loading, error, data}) => {
+            if (loading) return <Loading />;
+            if (error) return <Text>{error.message}</Text>;
+            return (
+              <ProductList
+                data={data.products}
+                key={this._keyExtractor}
+                header={this.header}
+                footer={this.footer}
+                navigation={this.props.navigation}
+              />
+            );
+          }}
+        </Query>
       </Container>
     );
   }

@@ -161,7 +161,7 @@ export default {
   footerPaddingBottom: 0,
 
   // FooterTab
-  tabBarTextColor: '#ccc',
+  tabBarTextColor: '#333',
   tabBarTextSize: 11,
   activeTab: '#fff',
   sTabBarActiveTextColor: '#f4c91d',
@@ -170,14 +170,14 @@ export default {
 
   // Header
   toolbarBtnColor: '#fff',
-  toolbarDefaultBg: '#f4c91d',
+  toolbarDefaultBg: 'transparent',
   toolbarHeight: 56,
   toolbarSearchIconSize: 23,
   toolbarInputColor: '#fff',
   searchBarHeight: platform === PLATFORM.IOS ? 30 : 40,
   searchBarInputHeight: platform === PLATFORM.IOS ? 40 : 50,
   toolbarBtnTextColor: '#fff',
-  toolbarDefaultBorder: '#f4c91d',
+  toolbarDefaultBorder: null,
   iosStatusbar: 'light-content',
   get statusBarColor() {
     return color(this.toolbarDefaultBg)

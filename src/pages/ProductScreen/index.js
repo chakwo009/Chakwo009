@@ -35,6 +35,8 @@ import Carousel from 'react-native-snap-carousel';
 // 匯入自定組件
 import ScaledImage from '../../components/scaledimage';
 import ProductDetails from '../../components/product-details';
+import MyIcon from '../../components/iconfont';
+import Loading from '../../components/loading';
 
 //匯入自定css
 import theme from '../../css/theme.js';
@@ -100,7 +102,7 @@ class Product extends React.Component {
         query={ONE_PRODUCT_QUERY}
         variables={{id: navigation.state.params.id}}>
         {({loading, error, data}) => {
-          if (loading) return <ActivityIndicator size="large" color="#ccc" />;
+          if (loading) return <Loading />;
           if (error) return <Text>{error.message}</Text>;
           return (
             <Container>
@@ -126,6 +128,7 @@ class Product extends React.Component {
                         <ScaledImage
                           uri={`https://www.hkstalls.com/images/products/${data.product.id}/${item.value}`}
                           width={Dimensions.get('window').width - 20}
+                          fall={require('../../images/banner/no-image_800x800.png')}
                           key={idx}
                         />
                       )}
@@ -226,7 +229,7 @@ class Product extends React.Component {
                       })
                     }>
                     <Thumbnail
-                      small
+                      style={{width: 32, height: 32}}
                       source={{
                         uri: `https://www.hkstalls.com/images/shops/${data.product.shop.id}/temp_logo.png`,
                       }}
@@ -234,16 +237,22 @@ class Product extends React.Component {
                     <Text>排檔</Text>
                   </Button>
                   <Button onPress={() => navigation.navigate('Home')}>
-                    <Icon name="bowtie" />
+                    <Icon>
+                      <MyIcon name={'cs'} style={[theme.text_l]} />
+                    </Icon>
                     <Text>查詢</Text>
                   </Button>
                   <Button onPress={() => navigation.navigate('HomeScreen')}>
-                    <Icon name="bowtie" />
+                    <Icon>
+                      <MyIcon name={'news'} style={[theme.text_l]} />
+                    </Icon>
                     <Text>評價</Text>
                   </Button>
-                  <TouchableHighlight style={{flex: 2}}>
-                    <Text>加入購物車</Text>
-                  </TouchableHighlight>
+                  <View style={{flex: 3}}>
+                    <TouchableHighlight style={[custom.footerbtn]}>
+                      <Text style={[custom.footerbtntext]}>加入購物車</Text>
+                    </TouchableHighlight>
+                  </View>
                 </FooterTab>
               </Footer>
             </Container>

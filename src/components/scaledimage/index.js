@@ -6,11 +6,11 @@ import AutoHeightImage from 'react-native-auto-height-image';
 
 //
 
-const ScaledImage = ({width, uri}) => (
+const ScaledImage = ({width, uri, fall}) => (
   <AutoHeightImage
     width={width}
     source={{uri: uri}}
-    fallbackSource={require('../../images/banner/no-image.png')}
+    fallbackSource={fall}
     resizeMode="contain"
   />
 );

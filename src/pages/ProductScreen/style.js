@@ -75,31 +75,6 @@ const custom = StyleSheet.create({
   },
 
   //Bottom Tools Bar Area
-  footer: {
-    flex: 1,
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-    backgroundColor: colors.white,
-    elevation: 4,
-    alignItems: 'center',
-    borderColor: colors.default,
-    borderTopWidth: 1,
-  },
-  footerlinkbox: {
-    marginLeft: 10,
-    marginRight: 10,
-    padding: gird.s,
-  },
-  footericon: {
-    color: colors.darkgrey,
-    textAlign: 'center',
-  },
-  footertext: {
-    fontSize: fonts.s,
-    color: colors.darkgrey,
-    lineHeight: 18,
-  },
 
   footerbtn: {
     flex: 1,
@@ -110,9 +85,9 @@ const custom = StyleSheet.create({
   },
   footerbtntext: {
     flex: 1,
-    fontSize: fonts.s,
     color: colors.white,
     textAlign: 'center',
+
     padding: gird.m,
   },
 });

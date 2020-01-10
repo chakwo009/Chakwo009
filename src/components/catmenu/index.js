@@ -5,6 +5,7 @@ import {Query, Mutation} from 'react-apollo';
 
 //import Component
 import ScaledImage from '../scaledimage';
+import Loading from '../loading';
 
 //css
 import theme from '../../css/theme.js';
@@ -35,7 +36,7 @@ export default class CatMenu extends React.Component {
     return (
       <Query query={PRODUCT_CATEGORIES_QUERY}>
         {({loading, error, data}) => {
-          if (loading) return <Text>Loading</Text>;
+          if (loading) return <Loading />;
           if (error) return <Text>Error: {error.message}</Text>;
           return (
             <View>

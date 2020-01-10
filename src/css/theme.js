@@ -87,7 +87,7 @@ const theme = StyleSheet.create({
   },
   text_l: {
     fontSize: fonts.l,
-    lineHeight: 36,
+    lineHeight: 32,
   },
   text_m: {
     fontSize: fonts.m,

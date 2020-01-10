@@ -39,6 +39,9 @@ import Carousel from 'react-native-snap-carousel';
 // 匯入自定組件
 import ScaledImage from '../../components/scaledimage';
 import ProductCard from '../../components/product-card';
+import MyIcon from '../../components/iconfont';
+import ProductList from '../../components/product-list';
+import Loading from '../../components/loading';
 
 //匯入自定css
 import theme from '../../css/theme.js';
@@ -152,7 +155,7 @@ class ShopScreen extends React.Component {
         query={SHOP_PRODUCTS_QUERY}
         variables={{id: navigation.state.params.id, filter: []}}>
         {({loading, error, data}) => {
-          if (loading) return <ActivityIndicator size="large" color="#ccc" />;
+          if (loading) return <Loading />;
           if (error) return <Text>{error.message}</Text>;
           return (
             <Drawer
@@ -181,48 +184,48 @@ class ShopScreen extends React.Component {
                 </View>
               }>
               <Container>
-                <View style={{flex: 1, padding: 10}}>
-                  <FlatList
+                <View style={[theme.container]}>
+                  <ProductList
                     data={data.shopProducts.products}
-                    keyExtractor={this._keyExtractor}
-                    //Import Header in Flatlist
-                    ListHeaderComponent={this.header(data)}
-                    //Import Footer
-                    ListFooterComponent={this.footer}
-                    numColumns={3}
-                    // Performance settings
-                    scrollEnabled={true}
-                    // Hidden Scrollbar
-                    showsVerticalScrollIndicator={false}
-                    //Child items
-                    renderItem={({item, idx}) => (
-                      <ProductCard
-                        product={item}
-                        navigation={this.props.navigation}
-                        key={idx}
-                      />
-                    )}
+                    key={this._keyExtractor}
+                    header={this.header(data)}
+                    footer={this.footer}
+                    navigation={this.props.navigation}
                   />
                 </View>
                 <Footer>
                   <FooterTab>
                     <Button onPress={() => navigation.navigate('Home')}>
-                      <Icon name="bowtie" />
+                      <Thumbnail
+                        style={{width: 32, height: 32}}
+                        source={{
+                          uri: `https://www.hkstalls.com/images/shops/${data.shopProducts.shop.id}/temp_logo.png`,
+                        }}
+                      />
                       <Text>排檔</Text>
                     </Button>
                     <Button
                       vertical
                       active={navigation.state.index == 1}
                       onPress={this.openControlPanel}>
-                      <Icon name="bowtie" />
+                      <Icon>
+                        <MyIcon name={'shoppingbag'} style={[theme.text_l]} />
+                      </Icon>
                       <Text>產品分類</Text>
                     </Button>
                     <Button onPress={() => navigation.navigate('Home')}>
-                      <Icon name="bowtie" />
+                      <Icon>
+                        <MyIcon name={'cs'} style={[theme.text_l]} />
+                      </Icon>
                       <Text>聯絡店員</Text>
                     </Button>
                     <Button onPress={() => navigation.navigate('Home')}>
-                      <Icon name="bowtie" />
+                      <Icon>
+                        <MyIcon
+                          name={'round-arrow-left'}
+                          style={[theme.text_l]}
+                        />
+                      </Icon>
                       <Text>返回上頁</Text>
                     </Button>
                   </FooterTab>
